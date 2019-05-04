@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bckglay"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+
+    <ImageView
+            android:layout_width="411dp"
+            android:layout_height="88dp" app:srcCompat="@drawable/logotitipin"
+            android:id="@+id/imageView"
+            android:layout_marginBottom="15dp"
+    />
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="35sp"
+            android:textAlignment="center"
+            android:id="@+id/textView"
+            android:textColor="#fff"
+            android:textAllCaps="true"
+            android:text="Register"
+    android:layout_marginBottom="15dp"        
+    />
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:hint="Username"
+            android:ems="10"
+            android:layout_gravity="center"
+            android:layout_marginBottom="15dp"
+    />
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:hint="Email"
+        android:layout_gravity="center"
+        android:layout_marginBottom="15dp"
+    />
+
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:layout_gravity="center"
+            android:hint="Password"
+    android:layout_marginBottom="15dp"        
+    />
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:layout_gravity="center"
+            android:hint="Confirm Password"
+    android:layout_marginBottom="15dp"        
+    />
+    <Button
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" tools:layout_editor_absoluteY="569dp"
+            tools:layout_editor_absoluteX="133dp" android:id="@+id/button2"
+            android:background="@drawable/gl1"
+            android:layout_gravity="center"
+    android:layout_marginBottom="15dp"        
+    />
+</LinearLayout>

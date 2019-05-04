@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string-array name="SpinnerFor">
+        <item>Foods</item>
+        <item>Accessoris</item>
+        <item>Gadget</item>
+        <item>Fashion</item>
+    </string-array>
+</resources>
