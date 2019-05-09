@@ -36,7 +36,7 @@ class OtherAsk : AppCompatActivity() {
     @TargetApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.full_cost_type)
+        setContentView(R.layout.other_ask_type)
         storage = FirebaseStorage.getInstance()
         storageReference = storage.reference
         btnUpload.setOnClickListener {

@@ -35,7 +35,7 @@ class PeopleWanted : AppCompatActivity() {
     @TargetApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.full_cost_type)
+        setContentView(R.layout.people_wanted_type)
         storage = FirebaseStorage.getInstance()
         storageReference = storage.reference
         btnUpload.setOnClickListener {
