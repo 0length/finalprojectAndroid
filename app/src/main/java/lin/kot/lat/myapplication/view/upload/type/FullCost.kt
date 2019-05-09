@@ -6,9 +6,11 @@ import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
@@ -18,6 +20,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import kotlinx.android.synthetic.main.full_cost_type.*
 import lin.kot.lat.myapplication.R
+import java.io.IOException
 import java.util.*
 
 class FullCost : AppCompatActivity() {
@@ -48,6 +51,9 @@ class FullCost : AppCompatActivity() {
                 else -> chooseFile()
             }
         }
+        post.setOnClickListener {
+            uploadFile()
+        }
     }
 
     private fun chooseFile(){
@@ -62,7 +68,7 @@ class FullCost : AppCompatActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when (requestCode){
             PERMISSION_REQUEST_CODE -> {
-                if (grantResults.isEmpty()|| grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                if (grantResults.isNotEmpty() || grantResults[0] == PackageManager.PERMISSION_DENIED)
                     Toast.makeText(this@FullCost, "Oops! Permission Denied!!", Toast.LENGTH_SHORT).show()
                 else
                     chooseFile()
@@ -72,13 +78,19 @@ class FullCost : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode != Activity.RESULT_OK){
-            return
+        if (resultCode ==  Activity.RESULT_OK&&data != null&& data.data != null){
+            filePath = data.data
+            try {
+                var bitmap : Bitmap = MediaStore.Images.Media.getBitmap(contentResolver, filePath)
+                imageView.setImageBitmap(bitmap)
+            }catch (e: IOException){
+                e.printStackTrace()
+            }
         }
         when (requestCode){
             PICK_IMAGE_REQUEST -> {
                 filePath = data!!.getData()
-                uploadFile()
+
             }
         }
     }
@@ -91,7 +103,7 @@ class FullCost : AppCompatActivity() {
             show()
         }
         var ref : StorageReference =
-            storageReference.child("images/"+ UUID.randomUUID().toString())
+            storageReference.child("images/full_cost/"+ UUID.randomUUID().toString())
         ref.putFile(filePath)
             .addOnProgressListener {
                     taskSnapshot ->
@@ -106,10 +118,10 @@ class FullCost : AppCompatActivity() {
                 progress.dismiss()
                 val uri = taskSnapshot.storage.downloadUrl
                 Log.v("Download File", "File.." +uri)
-                Glide.with(this@FullCost).load(uri).into(imgUpload)
+                Glide.with(this@FullCost).load(uri).into(imageView)
             }.addOnFailureListener {
-                    exception -> exception
-                .printStackTrace()
+                    e -> progress.dismiss()
+                Toast.makeText(this@FullCost, "Upload Failed"+ e.message, Toast.LENGTH_SHORT).show()
             }
     }
 }
